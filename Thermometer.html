@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style type="text/css">
+    
+    svg {
+       border: 1px solid black;
+    }
+
+    .axis line {
+        stroke-width: 2px;
+        stroke: #ccc;
+    }
+
+    .axis path {
+        display:none;
+    }
+
+</style>
+
+<body>
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+
+<script>
+
+    var margin = {top: 50, right: 50, bottom: 50, left: 50};
+
+    var width = 450 - margin.left - margin.right,
+        height = 700 - margin.top - margin.bottom;
+    
+    var body = d3.select ("body");
+    
+    var title = body.append ("h1")
+    .text ("Interactive Thermometer");
+    
+    var container = body.append ("div")
+    .attr ("class", "container");
+
+// farenheit Scale
+    var fScale = d3.scale.linear()
+    .domain([-55, 110])
+    .range([height, 0]);
+
+// farenheit axis
+    var fAxis = d3.svg.axis()
+    .scale(fScale)
+    .tickSize(-width)
+    .tickPadding(5)
+    .orient("left");
+
+    var svg = container.append ("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    svg.append("g")
+        .attr("class", "f axis")
+        .call(fAxis);
+
+</script>
+
+</body>
