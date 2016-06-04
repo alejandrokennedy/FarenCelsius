@@ -37,15 +37,27 @@
     var container = body.append ("div")
     .attr ("class", "container");
 
+// celsius Scale
+    var cScale = d3.scale.linear()
+    .domain([-50, 45])
+    .range([height, 0]);
+
 // farenheit Scale
     var fScale = d3.scale.linear()
-    .domain([-55, 110])
+    .domain([-58, 113])
     .range([height, 0]);
+
+// celsius axis
+    var cAxis = d3.svg.axis()
+    .scale(cScale)
+    .tickSize(-width/2+10)
+    .tickPadding(5)
+    .orient("right");
 
 // farenheit axis
     var fAxis = d3.svg.axis()
     .scale(fScale)
-    .tickSize(-width)
+    .tickSize(-width/2+10)
     .tickPadding(5)
     .orient("left");
 
@@ -58,6 +70,10 @@
     svg.append("g")
         .attr("class", "f axis")
         .call(fAxis);
+
+    svg.append("g")
+        .attr("class", "c axis")
+        .call(cAxis);
 
 </script>
 
